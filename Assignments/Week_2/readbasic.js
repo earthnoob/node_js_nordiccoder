@@ -6,7 +6,7 @@
 const ReadBasic = function readBasic(
   stdin = process.stdin,
   stdout = process.stdout,
-  configs = {},
+  // configs = {},
 ) {
   const readline = require('readline');
 
@@ -282,7 +282,7 @@ const ReadBasic = function readBasic(
   const close = () => {
     shared.readlineObj.close();
     shared.SIGINTEventListenerPresent = false;
-    process.emit('cleanup');
+    // process.emit('cleanup');
   };
 
   const askCallback = (question, validatorFunc = () => true, callback) => {
