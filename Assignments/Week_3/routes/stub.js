@@ -3,7 +3,9 @@ var router = express.Router();
 
 // GET stub main route.
 router.get('/', function(req, res, next) {
-  res.send('This is a stub route for testing purposes only.');
+  res.json(
+    { message: 'Hello, humans.', mood: 'Neutral' }
+  );
 });
 
 module.exports = router;
