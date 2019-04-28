@@ -23,13 +23,13 @@ const p = require('./task2');
   let wb = new xl.Workbook();
   let ws = wb.addWorksheet('Sheet 1');
 
-  Object.keys(products[0]).forEach((k, i) => { ws.cell(1, i + 1).string(k); });
+  Object.keys(products[0]).forEach((key, idx) => { ws.cell(1, idx + 1).string(key); });
 
   products.forEach((pd, index) => {
     Object.keys(pd).forEach((k, i) => {
-      ws.cell(index + 2, i + 1).string(pd[k].toString());
+      ws.cell(index + 1, i + 1).string(pd[k].toString());
     });
   });
-
+  ws.cell(2, 1).string('waaaat');
   wb.write('task3.xlsx');
 })();
