@@ -1,19 +1,44 @@
 var createError = require('http-errors');
 var express = require('express');
+var HB = require('handlebars');
 var hbs = require('express-handlebars');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var readFile = require('fs').readFile;
+var promisify = require('./utils/promisify');
 var app = express();
+
+var rf = promisify(readFile);
+var exphbs = hbs.create({
+  extname: 'hbs',
+  partialsDir: path.join(__dirname, 'views/partials'),
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.engine('hbs', hbs({
-  extname: 'hbs',
-  partialsDir: path.join(__dirname, 'views/partials'),
-}));
+app.engine('hbs', exphbs.engine);
+
+// Handlebars helper definitions go here
+require(path.join(__dirname, 'handlebars/handlebars_helpers.js'))(HB);
+
+// Bind express-handlebars compiled partials to handlebars'
+exphbs.getPartials()
+  .then((partials) => {
+    HB.partials = { ...HB.partials, ...partials };
+
+    // Pre-cache partials/templates for later use.
+    // return rf(path.join(__dirname, 'views/cached-partials.hbs'), 'utf8');
+    return exphbs.getTemplate(path.join(__dirname, 'views/cached-partials.hbs'));
+  })
+  .then((compiled) => {
+    compiled({});
+    return exphbs.getTemplate(path.join(__dirname, 'views/404.hbs'));
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -35,6 +60,7 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  console.log(err);
   // render the error page
   res.status(err.status || 500);
   res.render('404');

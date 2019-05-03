@@ -1,0 +1,46 @@
+{{#applyTemplate title='user' templateName='blank'}}
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">User Info</h6>
+            </div>
+            <div class="card-body">
+              <div style="display:flex;flex:1;flex-direction:row">
+                  <section style="margin-right:50px">
+                    <img src={{user/avatar}} alt='avatar' />
+                  </section>
+
+                  <section>
+                    <h4>Name</h4>
+                    <span>{{user/firstName}} {{user/lastName}}</span>
+
+                    <h4>Date Of Birth</h4>
+                    <span>{{user/dob}}</span>
+
+                    <h4>Gender</h4>
+                    <span>{{user/gender}}</span>
+
+                    <h4>Country</h4>
+                    <span>{{user/country}}</span>
+
+                    <h4>Phone Number</h4>
+                    <span>{{user/phoneNumber}}</span>
+
+                    <h4>Zipcode</h4>
+                    <span>{{user/zipcode}}</span>
+
+                    <h4>Username</h4>
+                    <span>{{user/username}}</span>
+
+                    <h4>Email</h4>
+                    <span>{{user/email}}</span>
+
+                    <h4>Confirmed User</h4>
+                    <span>{{user/emailVerified}}</span>
+
+                    <h4>Role</h4>
+                    <span>{{user/role}}</span>
+                  </section>
+              </div>
+            </div>
+          </div>
+{{/applyTemplate}}

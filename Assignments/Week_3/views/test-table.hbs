@@ -1,4 +1,8 @@
-{{#applyTemplate templateName='blank' title='HAHAHA'}}
+{{#generateTemplate this name='blank'}}
+  {{>blank-template}}
+{{/generateTemplate}}
+
+{{#applyPartial context=this partialName='blank' title='HAHAHA'}}
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Users</h6>
@@ -23,7 +27,7 @@
                   <tbody>
                     {{#each data}}
                       <tr>
-                        <td><a href="users/{{_id}}">{{_id}}</a></td>
+                        <td>{{_id}}</td>
                         <td><img src={{avatar}} style="max-width: 150px; height: auto;" alt="avatar" /></td>
                         <td>{{firstName}}</td>
                         <td>{{lastName}}</td>
@@ -43,4 +47,4 @@
               </div>
             </div>
           </div>
-{{/applyTemplate}}
+{{/applyPartial}}
