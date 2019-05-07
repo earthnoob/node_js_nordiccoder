@@ -4,9 +4,22 @@
  * Module dependencies.
  */
 
-var app = require('../Assignments/Week_3/app');
+var app; // = require('../Assignments/Week_3/app');
 var debug = require('debug')('week-3:server');
 var http = require('http');
+
+switch (process.argv[2]) {
+  case 'week-3':
+    app = require('../Assignments/Week_3/app');
+    debug = require('debug')('week-3:server');
+    break;
+  case 'week-4':
+    app = require('../Assignments/Week_4/app');
+    debug = require('debug')('week-4:server');
+    break;
+  default:
+    break;
+}
 
 /**
  * Get port from environment and store in Express.

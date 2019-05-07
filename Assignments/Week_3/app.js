@@ -5,9 +5,14 @@ var hbs = require('express-handlebars');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var dotenv = require('dotenv');
 var readFile = require('fs').readFile;
 var promisify = require('./utils/promisify');
 var app = express();
+
+// Setup .env
+dotenv.config();
 
 var rf = promisify(readFile);
 var exphbs = hbs.create({
@@ -45,6 +50,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// console.log(process.env);
 
 // Routes listing
 require('./routes/routesListing')(app);
