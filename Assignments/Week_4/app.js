@@ -5,9 +5,11 @@ var hbs = require('express-handlebars');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var promisify = require('./utils/promisify');
+var util = require('util');
 
 var app = express();
 
@@ -51,8 +53,30 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to MongoDB Atlas service
-mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
-  .then(() => { console.log('Atlas says hello'); }, (err) => { console.log(err); });
+mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true })
+  .then(
+    () => {
+      console.log('Atlas says hello');
+    },
+    (err) => {
+      console.log(err);
+      console.log('Trying fallback');
+      mongoose.connect(
+        process.env.DB_CONNECTION_STRING_FALLBACK, {
+          useNewUrlParser: true,
+          keepAlive: true,
+        },
+      )
+        .then(
+          () => {
+            console.log('Fallback Atlas says hello');
+          },
+          (errFallback) => {
+            console.log(errFallback);
+          },
+        );
+    },
+  );
 
 // Routes listing
 require('./routes/routesListing')(app);
