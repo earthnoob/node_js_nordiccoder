@@ -56,11 +56,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true })
   .then(
     () => {
-      console.log('Atlas says hello');
+      console.log('Atlas says hello 👋');
     },
     (err) => {
       console.log(err);
-      console.log('Trying fallback');
+      console.log('Atlas screwed up 🤦 Trying fallback');
       mongoose.connect(
         process.env.DB_CONNECTION_STRING_FALLBACK, {
           useNewUrlParser: true,
@@ -69,7 +69,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true })
       )
         .then(
           () => {
-            console.log('Fallback Atlas says hello');
+            console.log('Fallback Atlas says hello 😘');
           },
           (errFallback) => {
             console.log(errFallback);
@@ -98,10 +98,18 @@ app.use(function(err, req, res, next) {
   res.render('404');
 });
 
+process.on('SIGINT', function() {
+  process.emit('cleanup');
+});
+
 // Cleanup stuff before server exit
-process.on('exit', function () {
-  mongoose.disconnect();
+process.on('cleanup', function () {
   console.log('Exiting server...');
+  mongoose.disconnect()
+    .then(() => {
+      console.log('Atlas says goodbye 👋');
+      process.exit();
+    });
 });
 
 module.exports = app;

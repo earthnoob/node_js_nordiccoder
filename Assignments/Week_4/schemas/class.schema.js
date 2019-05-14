@@ -1,15 +1,14 @@
 var mongoose = require('mongoose');
-var { String, ObjectId } = mongoose.Schema.Types;
+var { Number, String, ObjectId } = mongoose.Schema.Types;
 
 const classSchema = new mongoose.Schema({
   classType: {
     type: String,
     required: true,
-    enum: ['A', 'B', 'C', 'D', 'MB'],
+    uppercase: true,
   },
   classLevel: {
-    type: ObjectId,
-    ref: 'SchoolLevel',
+    type: String,
     required: true,
   },
   classPosition: {
@@ -18,12 +17,22 @@ const classSchema = new mongoose.Schema({
   },
   homeroomTeacher: {
     type: ObjectId,
-    ref: 'Teacher',
+    ref: 'User',
   },
   schoolYear: {
     type: ObjectId,
     ref: 'SchoolYear',
   },
+  students: [{
+    type: ObjectId,
+    ref: 'User',
+  }],
 });
+
+classSchema
+  .virtual('fullClassName')
+  .get(function () {
+    return `${this.classLevel}${this.classType}${this.classPosition}`;
+  });
 
 module.exports = mongoose.model('Class', classSchema);

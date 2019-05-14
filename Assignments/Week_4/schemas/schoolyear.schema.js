@@ -1,11 +1,15 @@
 var mongoose = require('mongoose');
-var { Date, String } = mongoose.Schema.Types;
+var { Date, String, ObjectId } = mongoose.Schema.Types;
 
 const schoolyearSchema = new mongoose.Schema({
   schoolYear: {
     type: String,
     required: true,
   },
+  semesters: [{
+    type: ObjectId,
+    ref: 'Semester',
+  }],
   startDate: {
     type: Date,
     required: true,
