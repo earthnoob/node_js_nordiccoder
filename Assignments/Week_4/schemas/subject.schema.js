@@ -18,7 +18,6 @@ const subjectSchema = new mongoose.Schema({
     },
     isSubstitute: {
       type: Boolean,
-      default: false,
     },
   }],
   schoolYear: {

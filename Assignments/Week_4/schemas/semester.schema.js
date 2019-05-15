@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var { Date, String } = mongoose.Schema.Types;
+var { Date, String, ObjectId } = mongoose.Schema.Types;
 
 const semesterSchema = new mongoose.Schema({
   semester: {
@@ -12,6 +12,10 @@ const semesterSchema = new mongoose.Schema({
   },
   endDate: {
     type: Date,
+  },
+  schoolYear: {
+    type: ObjectId,
+    ref: 'SchoolYear',
   },
   notes: {
     type: String,

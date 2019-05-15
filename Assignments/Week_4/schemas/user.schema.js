@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var { String, Date, Boolean, ObjectId } = require('mongoose').Schema.Types;
+var {String, Date, Boolean, ObjectId} = mongoose.Schema.Types;
 
 const userSchema = new mongoose.Schema(
   {
@@ -70,14 +70,27 @@ const userSchema = new mongoose.Schema(
           },
           isGuardian: {
             type: Boolean,
-            default: false,
           },
         },
       ],
-      exams: [{
-        type: ObjectId,
-        ref: 'Exam',
-      }],
+      exams: [
+        {
+          type: ObjectId,
+          ref: 'Exam',
+        },
+      ],
+      conductPenalties: [
+        {
+          conduct: {
+            type: ObjectId,
+            ref: 'ConductCriteria',
+          },
+          createdAt: {
+            type: Date,
+            default: Date.now,
+          },
+        },
+      ],
     },
     teacherInfo: {
       employmentDate: {
@@ -90,6 +103,10 @@ const userSchema = new mongoose.Schema(
       pastExperiences: {
         type: [
           {
+            position: {
+              type: String,
+              required: true,
+            },
             experienceDescription: {
               type: String,
               required: true,
