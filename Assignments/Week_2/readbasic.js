@@ -3,7 +3,7 @@
 /* eslint no-control-regex: 0, global-require: 0, no-await-in-loop: 0 */
 
 /* END OF CONFIGURATIONS */
-const ReadBasic = function readBasic(
+const ReadBasic = (function readBasic(
   stdin = process.stdin,
   stdout = process.stdout,
   // configs = {},
@@ -371,6 +371,6 @@ const ReadBasic = function readBasic(
 
     return data;
   }; */
-};
+});
 
 module.exports = ReadBasic;
