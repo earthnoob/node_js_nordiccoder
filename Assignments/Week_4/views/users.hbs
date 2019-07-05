@@ -1,46 +1,46 @@
-{{#applyTemplate templateName='blank' title='HAHAHA'}}
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Users</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      {{#each headers}}
-                      <td>{{this}}</td>
-                      {{/each}}
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      {{#each headers}}
-                      <td>{{this}}</td>
-                      {{/each}}
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    {{#each data}}
-                      <tr>
-                        <td><a href="users/{{_id}}">{{_id}}</a></td>
-                        <td><img src={{avatar}} style="max-width: 150px; height: auto;" alt="avatar" /></td>
-                        <td>{{firstName}}</td>
-                        <td>{{lastName}}</td>
-                        <td>{{dob}}</td>
-                        <td>{{gender}}</td>
-                        <td>{{country}}</td>
-                        <td>{{phoneNumber}}</td>
-                        <td>{{zipcode}}</td>
-                        <td>{{username}}</td>
-                        <td>{{email}}</td>
-                        <td>{{emailVerified}}</td>
-                        <td>{{role}}</td>
-                      </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-{{/applyTemplate}}
+{{#import templateName='blank' title='User'}}
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Users</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            {{#each headers}}
+            <td>{{this}}</td>
+            {{/each}}
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            {{#each headers}}
+            <td>{{this}}</td>
+            {{/each}}
+          </tr>
+        </tfoot>
+        <tbody>
+          {{#each data}}
+          <tr>
+            <td><a href="users/{{_id}}">{{_id}}</a></td>
+            <td><img src={{avatar}} style="max-width: 150px; height: auto;" alt="avatar" /></td>
+            <td>{{firstName}}</td>
+            <td>{{lastName}}</td>
+            <td>{{dob}}</td>
+            <td>{{gender}}</td>
+            <td>{{country}}</td>
+            <td>{{phoneNumber}}</td>
+            <td>{{zipcode}}</td>
+            <td>{{username}}</td>
+            <td>{{email}}</td>
+            <td>{{emailVerified}}</td>
+            <td>{{role}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{{/import}}

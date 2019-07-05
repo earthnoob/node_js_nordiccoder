@@ -17,6 +17,10 @@ switch (process.argv[2]) {
     app = require('../Assignments/Week_4/app');
     debug = require('debug')('week-4:server');
     break;
+  case 'op':
+      app = require('../Assignments/Week_4/app');
+      debug = require('debug')('week-4:server');
+      break;
   default:
     break;
 }

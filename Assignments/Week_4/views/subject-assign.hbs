@@ -1,0 +1,104 @@
+{{#import templateName="index-admin" context=this title="Phân công GV phụ trách"}}
+    <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+      Phân công GV phụ trách
+    </h1>
+  </div>
+  <div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">
+            Danh sách môn học
+          </h6>
+          <div class="dropdown no-arrow"></div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="table-responsive">
+      <table class="table table-bordered" id="custom-table" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            {{#each headers}}
+            <td>{{this}}</td>
+            {{/each}}
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            {{#each headers}}
+            <td>{{this}}</td>
+            {{/each}}
+          </tr>
+        </tfoot>
+        <tbody>
+          {{#each subjects}}
+          <tr>
+            <td>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="sub-id" value={{_id}}>
+                  <a href="/subjects/{{_id}}">{{_id}}</a>
+                </label>
+              </div>
+            </td>
+            <td>{{name}}</td>
+            <td>{{code}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row d-none sub-info">
+    <!-- Area Chart -->
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary sub-info-header">
+            Thông tin cho môn học
+          </h6>
+          <div class="dropdown no-arrow"></div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <form method="POST" action="find">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputName">
+                  Tên
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputName"
+                  name="inputName"
+                  placeholder="Tên"
+                 />
+
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Tìm
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/js/input-radio-actions.js"></script>
+  <script src="/js/button-actions.js"></script>
+  <script src="/js/custom-table.js"></script>
+{{/import}}

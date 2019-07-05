@@ -1,0 +1,341 @@
+{{#import templateName="index-admin" context=this title="Giáo Viên"}}
+    <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+      Giáo Viên
+    </h1>
+    <a
+      href="#"
+      id="add-x-btn"
+      class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+    >
+      <i class="fas fa-plus fa-sm text-white-50"></i>
+      Thêm Giáo viên
+    </a>
+  </div>
+  <div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">
+            Tra Cứu
+          </h6>
+          <div class="dropdown no-arrow"></div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <form method="POST" action="find">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputName">
+                  Tên
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputName"
+                  name="inputName"
+                  placeholder="Tên"
+                 />
+
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Tìm
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-12 col-lg-12 d-none">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">
+            Danh sách Giáo viên
+          </h6>
+          <div class="dropdown no-arrow"></div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Main Area -->
+    <div id="add-x-card" class="col-xl-12 col-lg-12 d-none">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">
+            Thêm giáo viên
+          </h6>
+          <div class="dropdown no-arrow"></div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <form id="add-x-form" method="POST" action="add">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputTeaName">
+                  Họ Tên
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputTeaName"
+                  name="inputTeaName"
+                  placeholder="Họ Tên"
+                 />
+
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputTeaDob">
+                  Ngày sinh
+                </label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="inputTeaDob"
+                  name="inputTeaDob"
+                  placeholder="Ngày sinh"
+                 />
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputTeaGender">
+                Giới tính
+              </label>
+              <select
+                id="inputTeaGender"
+                name="inputTeaGender"
+                class="form-control"
+              >
+                <option value="NAM" selected>
+                  Nam
+                </option>
+                <option value="NU">
+                  Nữ
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputTeaTel">
+                Số ĐT
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputTeaTel"
+                name="inputTeaTel"
+                placeholder="Số ĐT"
+               />
+
+            </div>
+            <div class="form-group">
+              <label for="inputTeaAddr">
+                Địa chỉ
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputTeaAddr"
+                name="inputTeaAddr"
+                placeholder="Địa chỉ"
+               />
+
+            </div>
+            <div class="form-group">
+              <label for="inputTeaUsername">
+                Username
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputTeaUsername"
+                name="inputTeaUsername"
+                placeholder="Username"
+               />
+
+            </div>
+            <div class="form-group">
+              <label for="inputTeaEmail">
+                Email
+              </label>
+              <input
+                type="email"
+                class="form-control"
+                id="inputTeaEmail"
+                name="inputTeaEmail"
+                placeholder="Email"
+               />
+
+            </div>
+            <div class="form-group">
+              <label for="inputTeaPassword">
+                Mật khẩu
+              </label>
+              <input
+                type="password"
+                class="form-control"
+                id="inputTeaPassword"
+                name="inputTeaPassword"
+                placeholder="Mật khẩu"
+               />
+
+            </div>
+            <div class="form-group">
+              <label for="inputTeaEmpDate">
+                Ngày ứng tuyển
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                id="inputTeaEmpDate"
+                name="inputTeaEmpDate"
+                placeholder="Ngày ứng tuyển"
+               />
+
+            </div>
+            <div class="form-group">
+              <label for="inputTeaLevel">
+                Trình độ học vấn
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputTeaLevel"
+                name="inputTeaLevel"
+                placeholder="Trình độ học vấn"
+               />
+
+            </div>
+            <hr />
+            <fieldset
+              class="form-group"
+              name="parentsInfo"
+              id="x-form-group"
+            >
+              <legend>
+                Kinh nghiệm làm việc
+              </legend>
+              <div id="x-info">
+                <!-- This is where all the parents info gets grouped -->
+                <div class="card bg-light mb-3 p-3 d-none x-input">
+                  <div class="form-group">
+                    <label for="inputTeaPos">
+                      Vị trí
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="inputTeaPos"
+                      id="inputTeaPos"
+                      placeholder="Vị trí"
+                     />
+
+                  </div>
+                  <div class="form-group">
+                    <label for="inputTeaDesc">
+                      Đặc tả công việc
+                    </label>
+                    <textarea
+                      class="form-control"
+                      name="inputTeaDesc"
+                      id="inputTeaDesc"
+                      placeholder="Đặc tả công việc"
+                      rows="6"
+                     ></textarea>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="inputTeaStartDate">
+                      Ngày bắt đầu
+                    </label>
+                    <input
+                      type="date"
+                      id="inputTeaStartDate"
+                      name="inputTeaStartDate"
+                      class="form-control"
+                      placeholder="Ngày bắt đầu"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="inputTeaEndDate">
+                      Ngày kết thúc
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="inputTeaTel"
+                      id="inputTeaTel"
+                      placeholder="Ngày kết thúc"
+                     />
+
+                  </div>
+                  <div class="form-group">
+                    <label for="inputTeaNotes">
+                      Ghi chú
+                    </label>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      name="inputTeaNotes"
+                      id="inputTeaNotes"
+                      placeholder="Ghi chú"
+                      rows="6"
+                     ></textarea>
+
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <a
+                      href=""
+                      class="badge badge-error parents-form-group-remove-btn"
+                    >
+                      Xóa
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end">
+                <a
+                  href="#"
+                  class="badge badge-primary p-2"
+                  id="x-form-group-add-btn"
+                >
+                  Thêm kinh nghiệm làm việc
+                </a>
+              </div>
+            </fieldset>
+            <hr />
+            <a
+              href="#"
+              class="btn btn-primary btn-icon-split"
+              id="submit-x-btn"
+            >
+              <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+              </span>
+              <span class="text">
+                Thêm Giáo viên
+              </span>
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/js/button-actions.js"></script>
+{{/import}}

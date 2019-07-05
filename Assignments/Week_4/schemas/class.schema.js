@@ -2,17 +2,17 @@ var mongoose = require('mongoose');
 var { Number, String, ObjectId } = mongoose.Schema.Types;
 
 const classSchema = new mongoose.Schema({
-  classType: {
+  classType: { // a, b, c
     type: String,
     required: true,
     uppercase: true,
   },
-  classLevel: {
+  classLevel: { // 10, 11, 12
     type: String,
     required: true,
   },
-  classPosition: {
-    type: Number,
+  classPosition: { // 1-20
+    type: String,
     required: true,
   },
   homeroomTeacher: {
@@ -26,7 +26,11 @@ const classSchema = new mongoose.Schema({
   students: [{
     type: ObjectId,
     ref: 'User',
+    default: null,
   }],
+}, {
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true }
 });
 
 classSchema

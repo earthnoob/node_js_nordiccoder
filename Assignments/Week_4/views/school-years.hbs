@@ -1,0 +1,104 @@
+{{#import templateName="index-admin" context=this title="Năm học"}}
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+      Năm học
+    </h1>
+    <a
+      href="#"
+      id="add-x-btn"
+      class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+    >
+      <i class="fas fa-plus fa-sm text-white-50"></i>
+      Thêm Năm học
+    </a>
+  </div>
+  <div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">
+            Danh sách Năm học
+          </h6>
+          <div class="dropdown no-arrow"></div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Main Area -->
+    <div id="add-x-card" class="col-xl-12 col-lg-12 d-none">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">
+            Thêm năm học
+          </h6>
+          <div class="dropdown no-arrow"></div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <form id="add-x-form" method="POST" action="add">
+            <div class="form-group">
+              <label for="inputSchoolYear">
+                Năm học
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputSchoolYear"
+                name="inputSchoolYear"
+                placeholder="Năm học"
+               />
+
+            </div>
+            <div class="form-group">
+              <label for="inputSchoolYearStart">
+                Ngày bắt đầu
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                id="inputSchoolYearStart"
+                name="inputSchoolYearStart"
+              />
+            </div>
+            <div class="form-group">
+              <label for="inputSchoolYearEnd">
+                Ngày kết thúc
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                id="inputSchoolYearEnd"
+                name="inputSchoolYearEnd"
+              />
+            </div>
+            <hr />
+            <a
+              href="#"
+              class="btn btn-primary btn-icon-split"
+              id="submit-x-btn"
+            >
+              <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+              </span>
+              <span class="text">
+                Thêm năm học
+              </span>
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/js/button-actions.js"></script>
+  <script src="/js/custom-table.js"></script>
+{{/import}}

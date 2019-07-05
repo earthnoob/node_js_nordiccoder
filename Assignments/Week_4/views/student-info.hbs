@@ -1,0 +1,228 @@
+{{#import templateName=this/renderTemplate context=this title="Học sinh"}}
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- Circle Buttons -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">
+            Thông tin học sinh
+          </h6>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-4 d-flex flex-column align-items-center">
+              <img
+                src="https://api.adorable.io/avatar/ltt"
+                style="width:100%; max-width:350px; height:350px;"
+                alt="avatar"
+               />
+              <div class="mt-4">
+                <a href="#" class="btn btn-primary btn-icon-split" id="edit-account-btn">
+                <span class="icon text-white-50">
+                  <i class="fas fa-pen"></i>
+                </span>
+                <span class="text">
+                  Chỉnh sửa Tài Khoản
+                </span>
+              </a>
+              <div class="mt-2"></div>
+              <a href="#" class="btn btn-danger btn-icon-split" id="remove-account-btn">
+                <span class="icon text-white-50">
+                  <i class="fas fa-trash"></i>
+                </span>
+                <span class="text">
+                  Xóa Tài Khoản
+                </span>
+              </a>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <h3 class="text-gray-800 mb-3">
+                {{student/name}}
+              </h3>
+              <hr />
+              <div>
+                <h4 class="text-gray-500 text-xs mb-3">
+                  THÔNG TIN CHUNG
+                </h4>
+                <table
+                  class="p-0"
+                  style="border-collapse:unset; border-spacing: 0px;"
+                >
+                  <tbody>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Ngày Sinh
+                      </td>
+                      <td class="pb-3">
+                        {{student/dob}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Giới Tính
+                      </td>
+                      <td class="pb-3">
+                        {{student/gender}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Số ĐT
+                      </td>
+                      <td class="pb-3">
+                        {{student/telephone}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Địa Chỉ
+                      </td>
+                      <td class="pb-3">
+                        {{student/address}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Email
+                      </td>
+                      <td class="pb-3">
+                        {{student/email}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Username
+                      </td>
+                      <td class="pb-3">
+                        {{student/username}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr />
+              <div>
+                <h4 class="text-gray-500 text-xs mb-3">
+                  THÔNG TIN PHỤ HUYNH
+                </h4>
+                {{#each student/studentInfo/parents}}
+                  <div class="card mb-4">
+                    <div class="card-header">
+                      <h6 class="m-0 font-weight-bold text-secondary">
+                        {{name}}
+                      </h6>
+                    </div>
+                    <div class="card-body">
+                      <table
+                        class="p-0"
+                        style="border-collapse:unset; border-spacing: 0px;"
+                      >
+                        <tbody>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Ngày Sinh
+                            </td>
+                            <td class="pb-3">
+                              {{dob}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Giới Tính
+                            </td>
+                            <td class="pb-3">
+                              {{gender}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Số ĐT
+                            </td>
+                            <td class="pb-3">
+                              {{telephone}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Địa Chỉ
+                            </td>
+                            <td class="pb-3">
+                              {{address}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Email
+                            </td>
+                            <td class="pb-3">
+                              {{email}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Nghề nghiệp
+                            </td>
+                            <td class="pb-3">
+                              {{occupation}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Loại
+                            </td>
+                            <td class="pb-3">
+                              {{type}}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-none">
+    <div class="col-lg-12">
+      <!-- Brand Buttons -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">
+            Xóa tài khoản
+          </h6>
+        </div>
+        <div class="card-body">
+          <p>
+            Google and Facebook buttons are available featuring each company's respective brand color. They are used on the user login and registration pages.
+          </p>
+          <p>
+            You can create more custom buttons by adding a new color variable in the
+            <code>
+              _variables.scss
+            </code>
+            file and then using the Bootstrap button variant mixin to create a new style, as demonstrated in the
+            <code>
+              _buttons.scss
+            </code>
+            file.
+          </p>
+          <a href="#" class="btn btn-google btn-block">
+            <i class="fab fa-google fa-fw"></i>
+            .btn-google
+          </a>
+          <a href="#" class="btn btn-facebook btn-block">
+            <i class="fab fa-facebook-f fa-fw"></i>
+            .btn-facebook
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/account-actions.js"></script>
+{{/import}}

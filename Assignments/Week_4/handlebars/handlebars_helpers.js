@@ -1,7 +1,7 @@
 module.exports = ((HB) => {
   // HB.registerPartial('css-imports', '<h1>lolwut</h1>');
 
-  let cachedTemplates= {};
+  let cachedTemplates = {};
 
   /* const process = (context = {}, options = {}) => {
     const templateFn = options.fn;
@@ -20,7 +20,8 @@ module.exports = ((HB) => {
     }
   }; */
 
-  HB.registerHelper('greeting', ({ hash: { name, mood } }) => HB.compile('<h1>Hi my name is {{name}} and im feeling {{mood}}.</h1>')({ name, mood }));
+  HB.registerHelper('greeting', ({ hash: { name, mood } }) => 
+    HB.compile('<h1>Hi my name is {{name}} and im feeling {{mood}}.</h1>')({ name, mood }));
 
   HB.registerHelper('toUpper', value => {
     return value.toUpperCase();
@@ -36,7 +37,7 @@ module.exports = ((HB) => {
     return new HB.SafeString(string);
   });
 
-  HB.registerHelper('cacheTemplate', (context = {}, options = {}) => {
+  HB.registerHelper('cache', (context = {}, options = {}) => {
     const templateName = options.hash.name;
     const templateFn = options.fn;
     cachedTemplates = {
@@ -54,7 +55,7 @@ module.exports = ((HB) => {
     // console.log('HOORAY!');
   });
 
-  HB.registerHelper('applyTemplate', (options = {}) => {
+  HB.registerHelper('import', (options = {}) => {
     const injectFn = options.fn;
     const injectContext = options.hash.context || options.data.root || this;
     const cachedTemplateName = options.hash.templateName || 'default';
@@ -62,15 +63,18 @@ module.exports = ((HB) => {
     const cachedTemplateContext = {
       title: options.hash.title,
       content: injectFn(injectContext).toString(),
+      ...injectContext,
     };
+    // console.log(options.hash.context);
+
     try {
       return cachedTemplateObj.fn(cachedTemplateContext);
     } catch (e) {
-      return `applyTemplate haz sum erorr captain: ${e}`;
+      return `import haz sum erorr captain: ${e}`;
     }
   });
 
-  HB.registerHelper('generateTemplate', (context = {}, options = {}) => {
+  HB.registerHelper('generate', (context = {}, options = {}) => {
     const templateName = options.hash.name || 'default';
     const templateFn = options.fn;
     const templateContext = context;

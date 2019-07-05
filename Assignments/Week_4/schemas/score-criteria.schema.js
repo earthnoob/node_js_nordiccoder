@@ -7,6 +7,9 @@ const scoreCriteriaSchema = new mongoose.Schema({
     required: true,
     default: 'ORAL',
   },
+  description: {
+    type: String,
+  },
   weight: {
     type: Number,
     required: true,

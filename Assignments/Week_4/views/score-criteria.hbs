@@ -1,0 +1,175 @@
+{{#import templateName="index-admin" context=this title="Cột điểm"}}
+    <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+      Cột điểm
+    </h1>
+    <a
+      href="#"
+      id="add-x-btn"
+      class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+    >
+      <i class="fas fa-plus fa-sm text-white-50"></i>
+      Thêm Cột điểm
+    </a>
+  </div>
+
+    <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">
+            Các tiêu chí tính điềm
+          </h6>
+          <div class="dropdown no-arrow">
+            <a
+              class="dropdown-toggle"
+              href="#"
+              role="button"
+              id="dropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+              aria-labelledby="dropdownMenuLink"
+            >
+              <div class="dropdown-header">
+                Hành động:
+              </div>
+              <a class="dropdown-item" href="#">
+                Chỉnh sửa
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <table
+            class="table table-bordered"
+            id="custom-table"
+            width="100%"
+            cellspacing="0"
+          >
+            <thead>
+              <tr>
+                {{#each headers}}
+                  <td>
+                    {{this}}
+                  </td>
+                {{/each}}
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                {{#each headers}}
+                  <td>
+                    {{this}}
+                  </td>
+                {{/each}}
+              </tr>
+            </tfoot>
+            <tbody>
+              {{#each students}}
+                <tr>
+                  <td>
+                    <a href="/students/{{_id}}">
+                      {{_id}}
+                    </a>
+                  </td>
+                  <td>
+                    {{name}}
+                  </td>
+                  <td>
+                    {{grade}}
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+    <!-- Main Area -->
+    <div id="add-x-card" class="col-xl-12 col-lg-12 d-none">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">
+            Thêm tiêu chí tính điềm
+          </h6>
+          <div class="dropdown no-arrow"></div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <form id="add-x-form" method="POST" action="add">
+            <div class="form-group">
+              <label for="inputScoreCriteriaDesc">
+                Mô tả
+              </label>
+              <input
+                type="text"
+                id="inputScoreCriteriaDesc"
+                name="inputScoreCriteriaDesc"
+                class="form-control"
+                placeholder="Mô tả"
+              />
+            </div>
+            <div class="form-group">
+              <label for="inputScoreCriteriaCategory">
+                Code
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputScoreCriteriaCategory"
+                name="inputScoreCriteriaCategory"
+                placeholder="Code"
+              />
+            </div>
+            <div class="form-group">
+              <label for="inputScoreCriteriaWeight">
+                Hệ số
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputScoreCriteriaWeight"
+                name="inputScoreCriteriaWeight"
+                placeholder="Hệ số"
+              />
+            </div>
+            <hr />
+            <a
+              href="#"
+              class="btn btn-primary btn-icon-split"
+              id="submit-x-btn"
+            >
+              <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+              </span>
+              <span class="text">
+                Thêm tiêu chí tính điềm
+              </span>
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/input-radio-actions.js"></script>
+  <script src="/js/button-actions.js"></script>
+  <script src="/js/custom-table.js"></script>
+{{/import}}

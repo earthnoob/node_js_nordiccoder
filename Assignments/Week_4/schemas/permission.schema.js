@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
-var { String } = mongoose.Schema.Types;
+var { String, ObjectId } = mongoose.Schema.Types;
 
 const permissionSchema = new mongoose.Schema({
   entity: {
-    type: String,
-    uppercase: true,
+    type: ObjectId,
+    ref: 'Entity',
   },
   action: {
-    type: String,
-    required: true,
+    type: ObjectId,
+    ref: 'Action',
   },
   description: {
     type: String,
@@ -16,7 +16,7 @@ const permissionSchema = new mongoose.Schema({
 });
 
 permissionSchema
-  .virtual('fullPermissionName')
+  .virtual('permission')
   .get(function () {
     return `${this.entity}:${this.action}`;
   });

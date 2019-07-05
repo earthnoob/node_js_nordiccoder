@@ -17,11 +17,6 @@ router.get('/test', function(req, res, next) {
   });
 });
 
-router.get('/users/:id', function(req, res, next) {
-  res.render('user-details', {
-  });
-});
-
 router.get('/old', function(req, res, next) {
   res.render('index-old');
 });

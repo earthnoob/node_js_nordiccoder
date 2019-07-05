@@ -18,12 +18,9 @@ const subjectSchema = new mongoose.Schema({
     },
     isSubstitute: {
       type: Boolean,
+      default: false,
     },
   }],
-  schoolYear: {
-    type: ObjectId,
-    ref: 'SchoolYear',
-  },
 });
 
 module.exports = mongoose.model('Subject', subjectSchema);

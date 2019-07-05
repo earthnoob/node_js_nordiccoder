@@ -1,0 +1,184 @@
+{{#import templateName=this/renderTemplate context=this title="Tra cứu điểm"}}
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- Circle Buttons -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">
+            Tra cứu điểm
+          </h6>
+        </div>
+        <div class="card-body">
+          <div class="py-1">
+            <form method="POST" action="find" class="form-inline">
+              <label class="sr-only" for="inlineFormInputSchoolYear">
+                Năm học
+              </label>
+              <select
+                class="form-control mb-2 mr-sm-2"
+                name="InputSchoolYear"
+                id="inlineFormInputSchoolYear"
+              >
+                {{#each schoolYears}}
+                  <option value={{_id}}>
+                    {{schoolYear}}
+                  </option>
+                {{/each}}
+              </select>
+              <label class="sr-only" for="inlineFormInputGroupUsername2">
+                Học kỳ
+              </label>
+              <div class="input-group mb-2 mr-sm-2">
+                <select
+                  class="form-control"
+                  name=""
+                  id="inlineFormInputGroupUsername2"
+                >
+                  <option value="HK1">
+                    Học kỳ 1
+                  </option>
+                  <option value="HK2">
+                    Học kỳ 2
+                  </option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary mb-2">
+                Tra Cứu
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{#if data}}
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Brand Buttons -->
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+              Điềm số trong năm học
+            </h6>
+          </div>
+          <div class="card-body">
+            <table
+              class="table table-bordered"
+              id="custom-table"
+              width="100%"
+              cellspacing="0"
+            >
+              <thead>
+                <tr>
+                  <td></td>
+                  <td>
+                    Mieng
+                  </td>
+                  <td>
+                    15 phut
+                  </td>
+                  <td>
+                    1 tiet
+                  </td>
+                  <td>
+                    Giua ky
+                  </td>
+                  <td>
+                    Cuoi ky
+                  </td>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td></td>
+                  <td>
+                    Mieng
+                  </td>
+                  <td>
+                    15 phut
+                  </td>
+                  <td>
+                    1 tiet
+                  </td>
+                  <td>
+                    Giua ky
+                  </td>
+                  <td>
+                    Cuoi ky
+                  </td>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr>
+                  <td>
+                    Toán 10
+                  </td>
+                  <td>
+                    10 9.5 9
+                  </td>
+                  <td>
+                    8 7
+                  </td>
+                  <td>
+                    9 9
+                  </td>
+                  <td>
+                    8
+                  </td>
+                  <td>
+                    7.5
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Vật Lý 10
+                  </td>
+                  <td>
+                    7 6.5 6
+                  </td>
+                  <td>
+                    7 8
+                  </td>
+                  <td>
+                    10 8
+                  </td>
+                  <td>
+                    7
+                  </td>
+                  <td>
+                    6
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Tiếng Anh 10
+                  </td>
+                  <td>
+                    10 9.5 9
+                  </td>
+                  <td>
+                    8 7
+                  </td>
+                  <td>
+                    9 9
+                  </td>
+                  <td>
+                    10
+                  </td>
+                  <td>
+                    9.5
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <h3 class="h3 mt-2 text-gray-800">
+              Tổng kết: 8.4
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+  <script src="/js/account-actions.js"></script>
+  <script src="/js/custom-table.js"></script>
+{{/import}}

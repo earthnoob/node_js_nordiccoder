@@ -13,12 +13,9 @@ const semesterSchema = new mongoose.Schema({
   endDate: {
     type: Date,
   },
-  schoolYear: {
-    type: ObjectId,
-    ref: 'SchoolYear',
-  },
   notes: {
     type: String,
+    default: null,
   },
 });
 

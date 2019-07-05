@@ -32,7 +32,18 @@ const Exceptions = Object.freeze({
   },
 });
 
-const Password = function(initializer = 'pbkdf2') {
+/**
+ * Passxy - or Password Proxy - is a one-stop place for all your password
+ * hashing/decrypting implementations. It comes with methods suitable
+ * for storing/deploying/manipulating different flavours of password securing
+ * mechanisms through a unified, intuitive interface.
+ * 
+ * @author earthnoob
+ * 
+ * @param {any} initializer 
+ * @constructor
+ */
+const Passxy = function(initializer = 'pbkdf2') {
   let state = {
     modes: {
       PBKDF2: {
@@ -161,6 +172,10 @@ const Password = function(initializer = 'pbkdf2') {
     }
   };
 
+  /**
+   * 
+   * @param {*} algConf 
+   */
   const setMode = (algConf = 'pbkdf2') => {
     if (typeof algConf === 'string' && !!algConf) {
       if (state.modes[algConf.toUpperCase()]) {
@@ -247,6 +262,11 @@ const Password = function(initializer = 'pbkdf2') {
     );
   }
 
+  /**
+   * 
+   * @param {*} password 
+   * @param {*} conf 
+   */
   const encrypt = (password, conf) => {
     const currentMode = getMode();
     const lib = currentMode.lib;
@@ -258,20 +278,51 @@ const Password = function(initializer = 'pbkdf2') {
     return hashFn.call(null, password, lib, configs);
   };
 
-  const match = (candidate, encrypted, conf) => {
+  /**
+   * 
+   * @param {*} candidate 
+   * @param {*} encrypted 
+   * @param {*} isPassxyString 
+   * @param {*} conf 
+   */
+  const match = (candidate, encrypted, isPassxyString = false, conf) => {
+    let deserialized;
     let password;
 
-    if (typeof encrypted === 'string') {
-      password = encrypted;
+    /* if (typeof encrypted === 'string') {
+      if (isPassxyString) {
+        deserialized = deserialize(encrypted);
+      } else {
+        password = encrypted;
+      }
     } else if (typeof encrypted === 'object' &&
                 encrypted.constructor === Object().constructor) {
-      password = encrypted.enc;
-      setMode(encrypted.mod);
+      deserialized = encrypted;
     } else {
       throw Exceptions.InvalidTypeException(
         `Expected String or Object, but got ${typeof encrypted} instead.`
       );
+    } */
+
+    /* if (
+      (typeof encrypted !== 'string') ||
+      (typeof encrypted !== 'object' &&
+        encrypted.constructor !== Object().constructor)
+    ) {
+      throw Exceptions.InvalidTypeException(
+        `Expected String or Object, but got ${typeof encrypted} instead.`
+      );
+    } */
+
+    if (isPassxyString) {
+      // Is definitely a passxy-formatted string
+      deserialized = deserialize(encrypted);
+    } else {
+      // Could be a password string or an object
+      deserialized = encrypted;
     }
+    password = deserialized.enc || encrypted;
+    setMode(deserialized.mod || getModeString());
 
     const currentMode = getMode();
     const lib = currentMode.lib;
@@ -298,4 +349,4 @@ const Password = function(initializer = 'pbkdf2') {
   });
 };
 
-module.exports = Password;
+module.exports = Passxy;

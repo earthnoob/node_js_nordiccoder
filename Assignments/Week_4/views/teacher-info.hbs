@@ -1,0 +1,268 @@
+{{#import templateName="index-admin" context=this title="Giáo viên"}}
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- Circle Buttons -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">
+            Thông tin giáo giên
+          </h6>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-4 d-flex flex-column align-items-center">
+              <img
+                src="https://api.adorable.io/avatar/ltt"
+                style="width:100%; max-width:350px; height:auto;"
+                alt="avatar"
+               />
+              <div class="mt-4">
+              <a href="#" class="btn btn-danger btn-icon-split">
+                <span class="icon text-white-50">
+                  <i class="fas fa-trash"></i>
+                </span>
+                <span class="text">
+                  Xóa Tài Khoản
+                </span>
+              </a>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <h3 class="text-gray-800 mb-3">
+                {{teacher/name}}
+              </h3>
+              <hr />
+              <div>
+                <h4 class="text-gray-500 text-xs mb-3">
+                  THÔNG TIN CHUNG
+                </h4>
+                <table
+                  class="p-0"
+                  style="border-collapse:unset; border-spacing: 0px;"
+                >
+                  <tbody>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Ngày Sinh
+                      </td>
+                      <td class="pb-3">
+                        {{teacher/dob}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Giới Tính
+                      </td>
+                      <td class="pb-3">
+                        {{teacher/gender}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Số ĐT
+                      </td>
+                      <td class="pb-3">
+                        {{teacher/telephone}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Địa Chỉ
+                      </td>
+                      <td class="pb-3">
+                        {{teacher/address}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Email
+                      </td>
+                      <td class="pb-3">
+                        {{teacher/email}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Username
+                      </td>
+                      <td class="pb-3">
+                        {{teacher/username}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Ngày trúng tuyển
+                      </td>
+                      <td class="pb-3">
+                        {{teacher/employmentDate}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-800 pr-5 pb-3">
+                        Trình độ học vấn
+                      </td>
+                      <td class="pb-3">
+                        {{teacher/educationLevel}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr />
+              <div>
+                <h4 class="text-gray-500 text-xs mb-3">
+                  KINH NGHIỆM LÀM VIỆC
+                </h4>
+                {{#each teacher/pastExperiences}}
+                  <div class="card mb-4">
+                    <!-- <div class="card-header">
+                      <h6 class="m-0 font-weight-bold text-secondary">
+                        {{name}}
+                      </h6>
+                    </div> -->
+                    <div class="card-body">
+                      <table
+                        class="p-0"
+                        style="border-collapse:unset; border-spacing: 0px;"
+                      >
+                        <tbody>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Vị trí
+                            </td>
+                            <td class="pb-3">
+                              {{position}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Đặc tả công việc
+                            </td>
+                            <td class="pb-3">
+                              {{description}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Ngày bắt đầu
+                            </td>
+                            <td class="pb-3">
+                              {{from}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Ngày kết thúc
+                            </td>
+                            <td class="pb-3">
+                              {{to}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Ghi chú
+                            </td>
+                            <td class="pb-3">
+                              {{notes}}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+              <hr />
+              <div>
+                <h4 class="text-gray-500 text-xs mb-3">
+                  LỊCH SỬ GIẢNG DẠY
+                </h4>
+                {{#each teacher/teachingHistory}}
+                  <div class="card mb-4">
+                    <div class="card-body">
+                      <table
+                        class="p-0"
+                        style="border-collapse:unset; border-spacing: 0px;"
+                      >
+                        <tbody>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Năm Học
+                            </td>
+                            <td class="pb-3">
+                              {{schoolYear}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Lớp
+                            </td>
+                            <td class="pb-3">
+                              {{class}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Ngày bắt đầu
+                            </td>
+                            <td class="pb-3">
+                              {{startDate}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-gray-800 pr-5 pb-3">
+                              Ngày kết thúc
+                            </td>
+                            <td class="pb-3">
+                              {{endDate}}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- Brand Buttons -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">
+            Xóa tài khoản
+          </h6>
+        </div>
+        <div class="card-body">
+          <p>
+            Google and Facebook buttons are available featuring each company's respective brand color. They are used on the user login and registration pages.
+          </p>
+          <p>
+            You can create more custom buttons by adding a new color variable in the
+            <code>
+              _variables.scss
+            </code>
+            file and then using the Bootstrap button variant mixin to create a new style, as demonstrated in the
+            <code>
+              _buttons.scss
+            </code>
+            file.
+          </p>
+          <a href="#" class="btn btn-google btn-block">
+            <i class="fab fa-google fa-fw"></i>
+            .btn-google
+          </a>
+          <a href="#" class="btn btn-facebook btn-block">
+            <i class="fab fa-facebook-f fa-fw"></i>
+            .btn-facebook
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/import}}

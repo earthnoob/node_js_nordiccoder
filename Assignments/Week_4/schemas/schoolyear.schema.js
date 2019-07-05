@@ -19,6 +19,7 @@ const schoolyearSchema = new mongoose.Schema({
   },
   notes: {
     type: String,
+    default: null,
   },
 });
 
