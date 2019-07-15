@@ -1,4 +1,5 @@
 // Route imports
+var redirectRouter = require('./redirect.route');
 var indexRouter = require('./index.route');
 var loginRouter = require('./login.route');
 var logoutRouter = require('./logout.route');
@@ -41,6 +42,7 @@ module.exports = (function (app) {
   }); */
 
   // Route matching
+  app.use('/', redirectRouter);
   app.use('/home', indexRouter);
   app.use('/login', loginRouter);
   app.use('/logout', logoutRouter);

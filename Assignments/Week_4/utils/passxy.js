@@ -37,14 +37,14 @@ const Exceptions = Object.freeze({
  * hashing/decrypting implementations. It comes with methods suitable
  * for storing/deploying/manipulating different flavours of password securing
  * mechanisms through a unified, intuitive interface.
- * 
+ *
  * @author earthnoob
- * 
- * @param {any} initializer 
+ *
+ * @param {any} initializer
  * @constructor
  */
-const Passxy = function(initializer = 'pbkdf2') {
-  let state = {
+const Passxy = function passxy(initializer = 'pbkdf2') {
+  const state = {
     modes: {
       PBKDF2: {
         name: 'pbkdf2',
@@ -64,13 +64,13 @@ const Passxy = function(initializer = 'pbkdf2') {
             PASSWORD_LEN,
             DIGEST_ALG,
           )
-            .then(derivedKey => {
-              const encrypted = `${derivedKey.toString('base64')}.${salt.toString('base64')}.${ITERATION_COUNT}`;
+            .then((derivedKey) => {
+              const encrypted = `${derivedKey.toString(
+                'base64',
+              )}.${salt.toString('base64')}.${ITERATION_COUNT}`;
               return encrypted;
             })
-            .catch(err => {
-              return err;
-            });
+            .catch(err => err);
         },
         decryptor(candidate, enc, cryptoLib, configs) {
           const [password, salt, iterCount] = enc.split(/\./g);
@@ -83,9 +83,9 @@ const Passxy = function(initializer = 'pbkdf2') {
             +iterCount,
             passLen,
             DIGEST_ALG,
-          ).then(hashedCandidate => {
-            return hashedCandidate.toString('base64') === password;
-          }).catch(err => err);
+          )
+            .then(hashedCandidate => hashedCandidate.toString('base64') === password)
+            .catch(err => err);
         },
         configs: {
           DIGEST_ALG: 'sha3-512',
@@ -99,16 +99,15 @@ const Passxy = function(initializer = 'pbkdf2') {
 
           return cryptoLib
             .genSalt(SALT_ROUNDS)
-            .then(salt => {
-              return cryptoLib
-                .hash(password, salt)
-                .then(hash => hash)
-                .catch(err => err);
-            })
+            .then(salt => cryptoLib
+              .hash(password, salt)
+              .then(hash => hash)
+              .catch(err => err))
             .catch(err => err);
         },
-        decryptor(candidate, enc, cryptoLib, configs) {
-          return cryptoLib.compare(candidate, enc)
+        decryptor(candidate, enc, cryptoLib) {
+          return cryptoLib
+            .compare(candidate, enc)
             .then(result => result)
             .catch(err => err);
         },
@@ -124,7 +123,7 @@ const Passxy = function(initializer = 'pbkdf2') {
             .then(derivedKey => derivedKey.toString('base64'))
             .catch(err => err);
         },
-        decryptor(candidate, enc, cryptoLib, configs) {
+        decryptor(candidate, enc, cryptoLib) {
           return promisify(cryptoLib.scrypt)()
             .then(key => key.toString('base64') === enc)
             .catch(err => err);
@@ -134,7 +133,14 @@ const Passxy = function(initializer = 'pbkdf2') {
         name: 'argon2',
         lib: argon2,
         encryptor(password, cryptoLib, configs) {
-          const { TYPE, HASH_LEN, TIME_COST, MEM_COST, PARALLELISM, RAW } = configs;
+          const {
+            TYPE,
+            HASH_LEN,
+            TIME_COST,
+            MEM_COST,
+            PARALLELISM,
+            RAW,
+          } = configs;
 
           return cryptoLib
             .hash(password, {
@@ -148,8 +154,9 @@ const Passxy = function(initializer = 'pbkdf2') {
             .then(hash => hash.toString('base64'))
             .catch(err => err);
         },
-        decryptor(candidate, enc, cryptoLib, configs) {
-          return cryptoLib.verify(enc, candidate)
+        decryptor(candidate, enc, cryptoLib) {
+          return cryptoLib
+            .verify(enc, candidate)
             .then(result => result)
             .catch(err => err);
         },
@@ -157,7 +164,7 @@ const Passxy = function(initializer = 'pbkdf2') {
           TYPE: 'argon2i',
           HASH_LEN: 32,
           TIME_COST: 25,
-          MEM_COST: Math.pow(2, 16),
+          MEM_COST: 2 ** 16,
           PARALLELISM: 2,
           RAW: false,
         },
@@ -169,12 +176,12 @@ const Passxy = function(initializer = 'pbkdf2') {
     },
     set currentMode(alg) {
       this.modes.current = alg.toLowerCase();
-    }
+    },
   };
 
   /**
-   * 
-   * @param {*} algConf 
+   *
+   * @param {*} algConf
    */
   const setMode = (algConf = 'pbkdf2') => {
     if (typeof algConf === 'string' && !!algConf) {
@@ -182,19 +189,19 @@ const Passxy = function(initializer = 'pbkdf2') {
         state.currentMode = algConf;
       } else {
         // Throw ImplementationInvalidException
-        throw Exceptions.InvalidModeException(
-          `Unsupported mode ${algConf}.`,
-        );
+        throw Exceptions.InvalidModeException(`Unsupported mode ${algConf}.`);
       }
     } else if (
-      typeof algConf === 'object' &&
-      algConf.constructor === Object().constructor &&
-      Object.keys(algConf) > 0
+      typeof algConf === 'object'
+      && algConf.constructor === Object().constructor
+      && Object.keys(algConf) > 0
     ) {
-      const {name, lib, conf, encryptor, decryptor} = algConf;
+      const {
+        name, lib, conf, encryptor, decryptor,
+      } = algConf;
       if (typeof lib !== 'object' || Object.keys(lib) === 0) {
         // Throw ImplementationEmptyException
-        throw Exception.InvalidImplementationException(
+        throw Exceptions.InvalidImplementationException(
           'Implementation appears to be invalid. Please re-check.',
         );
       } else {
@@ -204,8 +211,9 @@ const Passxy = function(initializer = 'pbkdf2') {
             name: name.toUpperCase(),
             lib,
             configs: conf || {},
-            encryptor: encryptor || (function (password, cryptoLib, configs) {}),
-            decryptor: decryptor || (function (candidate, enc, cryptoLib, configs) {}),
+            encryptor: encryptor || function (password, cryptoLib, configs) {},
+            decryptor:
+              decryptor || function (candidate, enc, cryptoLib, configs) {},
           },
         };
         state.currentMode = name;
@@ -221,73 +229,69 @@ const Passxy = function(initializer = 'pbkdf2') {
 
   const getConf = () => getMode().configs;
 
-  const setConf = conf => {
-    const currentMode = getMode();
+  const setConf = (conf) => {
     state.modes[getModeString()] = { ...state.modes[getModeString()], ...conf };
   };
 
-  const setEncryptor = encryptor => { state.modes[getModeString()].encryptor = encryptor; };
-  const setDecryptor = decryptor => { state.modes[getModeString()].decryptor = decryptor; };
+  const setEncryptor = (encryptor) => {
+    state.modes[getModeString()].encryptor = encryptor;
+  };
+  const setDecryptor = (decryptor) => {
+    state.modes[getModeString()].decryptor = decryptor;
+  };
 
   const getState = () => state;
 
-  const json = (enc) => ({
+  const json = enc => ({
     enc,
     mod: getModeString(),
   });
 
-  const toString = (enc) =>
-    JSON.stringify(json(enc));
+  const toString = enc => JSON.stringify(json(enc));
 
   const serialize = encObj => Buffer.from(toString(encObj)).toString('base64');
 
-  const deserialize = encString => {
-    return JSON.parse(Buffer.from(encString, 'base64').toString('utf8'));
-  };
+  const deserialize = encString => JSON.parse(Buffer.from(encString, 'base64').toString('utf8'));
 
   /**
    * Some initializing stuff here
-   **/
-
+   */
   if (
-    typeof initializer === 'string' ||
-    (typeof initializer === 'object' &&
-      initializer.constructor === Object().constructor)
+    typeof initializer === 'string'
+    || (typeof initializer === 'object'
+      && initializer.constructor === Object().constructor)
   ) {
     setMode(initializer);
   } else {
-    //Throw InvalidTypeException error
+    // Throw InvalidTypeException error
     throw Exceptions.InvalidTypeException(
       `Expected String or Object, but got ${typeof initializer} instead.`,
     );
   }
 
   /**
-   * 
-   * @param {*} password 
-   * @param {*} conf 
+   *
+   * @param {*} password
+   * @param {*} conf
    */
   const encrypt = (password, conf) => {
     const currentMode = getMode();
-    const lib = currentMode.lib;
+    const { lib } = currentMode;
     const configs = conf || currentMode.configs;
-    let hashFn;
+    const hashFn = currentMode.encryptor;
 
-    hashFn = currentMode.encryptor;
-    
     return hashFn.call(null, password, lib, configs);
   };
 
   /**
-   * 
-   * @param {*} candidate 
-   * @param {*} encrypted 
-   * @param {*} isPassxyString 
-   * @param {*} conf 
+   *
+   * @param {*} candidate
+   * @param {*} encrypted
+   * @param {*} isPassxyString
+   * @param {*} conf
    */
   const match = (candidate, encrypted, isPassxyString = false, conf) => {
     let deserialized;
-    let password;
 
     /* if (typeof encrypted === 'string') {
       if (isPassxyString) {
@@ -321,11 +325,12 @@ const Passxy = function(initializer = 'pbkdf2') {
       // Could be a password string or an object
       deserialized = encrypted;
     }
-    password = deserialized.enc || encrypted;
+
+    const password = deserialized.enc || encrypted;
     setMode(deserialized.mod || getModeString());
 
     const currentMode = getMode();
-    const lib = currentMode.lib;
+    const { lib } = currentMode;
     const configs = conf || currentMode.configs;
 
     return currentMode.decryptor.call(null, candidate, password, lib, configs);
